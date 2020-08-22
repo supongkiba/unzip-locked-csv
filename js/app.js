@@ -18,14 +18,14 @@ var readFile = () => {
                     })
                     let data_str = arr.join("");
                     /* Call XLSX */
-                    let workbook = XLSX.read(data_str, { type: "binary" });
+                    let workbook = XLSX.read(data_str, { type: "binary", cellDates:true, cellNF: false, cellText:false });
                     /* Get the worksheet name */
                     let first_sheet_name = workbook.SheetNames[0]; //0:  first worksheet by default
                     /* Get worksheet */
                     let worksheet = workbook.Sheets[first_sheet_name];
 
-                    /* Array for JSON objects for each file */
-                    let JSONOBJ = JSON.stringify(XLSX.utils.sheet_to_json(worksheet, { raw: true }), null, 2);
+                    /* Array for objects for each file */
+                    let JSONOBJ = JSON.stringify(XLSX.utils.sheet_to_json(worksheet, {dateNF:"YYYY-MM-DD"}), null, 2);
                     $('#data').append(`<div>${JSONOBJ}</div><br>`)
                 });
             } catch (error) {
