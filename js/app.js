@@ -7,7 +7,6 @@ var readFile = () => {
         fileRead.onload = function (event) {
             try {
                 var zip = new Minizip(new Uint8Array(event.target.result));
-                var dataRes = "<h3>Here is the extracted Data</h3>"
                 zip.list({ encoding: "buffer" }).forEach(function (file) {
                     /* Extract the data of the sheet */
                     let data = zip.extract(file.filepath, { password: password });
